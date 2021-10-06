@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace tex_prog
 {
-    public class teploboat : Ship
+    public class Teploboat : Ship
     {
         /// Дополнительный цвет
         public Color DopColor { private set; get; }
@@ -31,7 +31,7 @@ namespace tex_prog
         /// <param name="sideSpoiler">Признак наличия боковых спойлеров</param>
         /// <param name="backSpoiler">Признак наличия заднего спойлера</param>
         /// <param name="sportLine">Признак наличия гоночной полосы</param>
-        public teploboat(int maxSpeed, float weight, Color mainColor, Color dopColor,
+        public Teploboat(int maxSpeed, float weight, Color mainColor, Color dopColor,
         bool window, bool line, bool trub) : base(maxSpeed, weight, mainColor, 100, 60)
         {
             DopColor = dopColor;

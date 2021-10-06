@@ -12,8 +12,7 @@ namespace tex_prog
 {
     public partial class Form1 : Form
     {
-		teploboat windowBoat;
-		Direction direction;
+		private ITransport ship;
 		public Form1()
 		{
 			InitializeComponent();
@@ -22,15 +21,23 @@ namespace tex_prog
 		{
 			Bitmap bmp = new Bitmap(pictureBoxBoat.Width, pictureBoxBoat.Height);
 			Graphics g = Graphics.FromImage(bmp);
-			windowBoat.DrawTransport(g);
+			ship.DrawTransport(g);
 			pictureBoxBoat.Image = bmp;
 		}
-		private void buttonCreate_Click(object sender, EventArgs e)
+		private void buttonCreateShip_Click(object sender, EventArgs e)
 		{
-			Random rand = new Random();
-			windowBoat = new teploboat();
-			windowBoat.SetPosition(rand.Next(pictureBoxBoat.Width), rand.Next(pictureBoxBoat.Height), pictureBoxBoat.Width, pictureBoxBoat.Height);
-			windowBoat.Init(5, 10, Color.LightCoral, Color.LightBlue, true, true, true);
+			Random rnd = new Random();
+			ship = new Ship(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Honeydew);
+			ship.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxBoat.Width,
+				pictureBoxBoat.Height);
+			Draw();
+		}
+		private void buttonCreateSuperShip_Click(object sender, EventArgs e)
+		{
+			Random rnd = new Random();
+			ship = new Teploboat(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Honeydew, Color.DarkMagenta, true, true, true);
+			ship.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxBoat.Width,
+				pictureBoxBoat.Height);
 			Draw();
 		}
 		private void buttonMove_Click(object sender, EventArgs e)
@@ -39,19 +46,19 @@ namespace tex_prog
 			switch (name)
 			{
 				case "buttonUp":
-					windowBoat.MoveTransport(Direction.Up);
+					ship.MoveTransport(Direction.Up);
 					break;
 				case "buttonDown":
-					windowBoat.MoveTransport(Direction.Down);
+					ship.MoveTransport(Direction.Down);
 					break;
 				case "buttonLeft":
-					windowBoat.MoveTransport(Direction.Left);
+					ship.MoveTransport(Direction.Left);
 					break;
 				case "buttonRight":
-					windowBoat.MoveTransport(Direction.Right);
+					ship.MoveTransport(Direction.Right);
 					break;
 			}
 			Draw();
 		}
-	}
+    }
 }
