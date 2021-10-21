@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace tex_prog
+namespace WindowsFormsShip
 {
     public enum Direction
     {

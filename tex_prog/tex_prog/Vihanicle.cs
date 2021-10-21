@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace tex_prog
+namespace WindowsFormsShip
 {
     public abstract class Vihanicle : ITransport
     {

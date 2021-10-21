@@ -5,14 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace tex_prog
+namespace WindowsFormsShip
 {
     public class Ship : Vihanicle
     {
         /// Ширина отрисовки автомобиля
         protected readonly int shipWidth = 150;
         /// Высота отрисовки автомобиля
-        protected readonly int shipHeight = 110;
+        protected readonly int shipHeight = 70;
+
+        ///
+        protected readonly int standartHeight = 110;
 
         /// Конструктор
         /// <param name="maxSpeed">Максимальная скорость</param>
@@ -69,13 +72,13 @@ namespace tex_prog
                     break;
                 //вверх
                 case Direction.Up:
-                    if (_startPosY - step >= 0)
+                    if (_startPosY - step >= -(standartHeight - shipHeight))
                     {
                         _startPosY -= step;
                     }
                     else
                     {
-                        _startPosY = 0;
+                        _startPosY = -(standartHeight - shipHeight);
                     }
                     break;
                 //вниз

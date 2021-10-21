@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace tex_prog
+namespace WindowsFormsShip
 {
     public class Teploboat : Ship
     {
@@ -32,7 +32,7 @@ namespace tex_prog
         /// <param name="backSpoiler">Признак наличия заднего спойлера</param>
         /// <param name="sportLine">Признак наличия гоночной полосы</param>
         public Teploboat(int maxSpeed, float weight, Color mainColor, Color dopColor,
-        bool window, bool line, bool trub) : base(maxSpeed, weight, mainColor, 100, 60)
+        bool window, bool line, bool trub) : base(maxSpeed, weight, mainColor, 150, 110)
         {
             DopColor = dopColor;
             Window = window;
