@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace WindowsFormsShip
 {
-    public abstract class Vihanicle : ITransport
+    public abstract class Vehicle : ITransport
     {
         /// Левая координата отрисовки автомобиля
         protected float _startPosX;
