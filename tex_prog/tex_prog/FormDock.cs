@@ -12,47 +12,76 @@ namespace WindowsFormsShip
 {
     public partial class FormDock : Form
     {
-        private readonly Parking<Ship> parking;
+        private readonly DockCollection dockCollection;
         public FormDock()
         {
             InitializeComponent();
-            parking = new Parking<Ship>(pictureBoxParking.Width, pictureBoxParking.Height);
+            dockCollection = new DockCollection(pictureBoxParking.Width, pictureBoxParking.Height);
             Draw();
+        }
+        private void ReloadLevels()
+        {
+            int index = listBoxDocks.SelectedIndex;
+            listBoxDocks.Items.Clear();
+            for (int i = 0; i < dockCollection.Keys.Count; i++)
+            {
+                listBoxDocks.Items.Add(dockCollection.Keys[i]);
+            }
+            if (listBoxDocks.Items.Count > 0 && (index == -1 || index >=
+           listBoxDocks.Items.Count))
+            {
+                listBoxDocks.SelectedIndex = 0;
+            }
+            else if (listBoxDocks.Items.Count > 0 && index > -1 && index <
+           listBoxDocks.Items.Count)
+            {
+                listBoxDocks.SelectedIndex = index;
+            }
         }
         private void Draw()
         {
-            Bitmap bmp = new Bitmap(pictureBoxParking.Width, pictureBoxParking.Height);
-            Graphics gr = Graphics.FromImage(bmp);
-            parking.Draw(gr);
-            pictureBoxParking.Image = bmp;
+            if (listBoxDocks.SelectedIndex > -1)
+            {//если выбран один из пуктов в listBox (при старте программы ни один пункт
+             //не будет выбран и может возникнуть ошибка, если мы попытаемся обратиться к элементу
+             //listBox)
+                 Bitmap bmp = new Bitmap(pictureBoxParking.Width, pictureBoxParking.Height);
+                Graphics gr = Graphics.FromImage(bmp);
+                dockCollection[listBoxDocks.SelectedItem.ToString()].Draw(gr);
+                pictureBoxParking.Image = bmp;
+            }
         }
-        private void buttonSetShip_Click(object sender, EventArgs e)
+        private void buttonAddDock_Click(object sender, EventArgs e)
         {
-            ColorDialog dialog = new ColorDialog();
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if (string.IsNullOrEmpty(textBoxNewLevelName.Text))
             {
-                var ship = new Ship(100, 1000, dialog.Color);
-                if ((parking + ship) != -1)
+                MessageBox.Show("Введите название парковки", "Ошибка",
+               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            dockCollection.AddDock(textBoxNewLevelName.Text);
+            ReloadLevels();
+        }
+        private void buttonDelDock_Click(object sender, EventArgs e)
+        {
+            if (listBoxDocks.SelectedIndex > -1)
+            {
+                if (MessageBox.Show($"Удалить парковку{ listBoxDocks.SelectedItem.ToString()}?",
+                    "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    Draw();
-                }
-                else
-                {
-                    MessageBox.Show("Парковка переполнена");
+                    dockCollection.DelDock(textBoxNewLevelName.Text);
+                    ReloadLevels();
                 }
             }
         }
-        private void buttonSetSuperShip_Click(object sender, EventArgs e)
+        private void buttonSetShip_Click(object sender, EventArgs e)
         {
-            ColorDialog dialog = new ColorDialog();
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if (listBoxDocks.SelectedIndex > -1)
             {
-                ColorDialog dialogDop = new ColorDialog();
-                if (dialogDop.ShowDialog() == DialogResult.OK)
+                ColorDialog dialog = new ColorDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    var ship = new Teploboat(100, 1000, dialog.Color, dialogDop.Color,
-                   true, true, true);
-                    if ((parking + ship) != -1)
+                    var ship = new Ship(100, 1000, dialog.Color);
+                    if ((dockCollection[listBoxDocks.SelectedItem.ToString()] + ship) != -1)
                     {
                         Draw();
                     }
@@ -63,11 +92,36 @@ namespace WindowsFormsShip
                 }
             }
         }
+        private void buttonSetSuperShip_Click(object sender, EventArgs e)
+        {
+            if (listBoxDocks.SelectedIndex > -1)
+            {
+                ColorDialog dialog = new ColorDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    ColorDialog dialogDop = new ColorDialog();
+                    if (dialogDop.ShowDialog() == DialogResult.OK)
+                    {
+                        var ship = new Teploboat(100, 1000, dialog.Color, dialogDop.Color,
+                       true, true, true);
+                        if ((dockCollection[listBoxDocks.SelectedItem.ToString()] + ship) != -1)
+                        {
+                            Draw();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Парковка переполнена");
+                        }
+                    }
+                }
+            }
+        }
         private void buttonTakeShip_Click(object sender, EventArgs e)
         {
-            if (maskedTextBox1.Text != "")
+            if (listBoxDocks.SelectedIndex > -1 && maskedTextBox1.Text != "")
             {
-                var car = parking - (Convert.ToInt32(maskedTextBox1.Text) + 1);
+                var car = dockCollection[listBoxDocks.SelectedItem.ToString()] -
+               Convert.ToInt32(maskedTextBox1.Text);
                 if (car != null)
                 {
                     FormShip form = new FormShip();
@@ -76,6 +130,10 @@ namespace WindowsFormsShip
                 }
                 Draw();
             }
+        }
+        private void listBoxDocks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Draw();
         }
     }
 }
