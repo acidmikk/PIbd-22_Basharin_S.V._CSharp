@@ -42,6 +42,7 @@ namespace WindowsFormsShip
             pictureWidth = picWidth;
             pictureHeight = picHeight;
         }
+
         public static int operator +(Parking<T> p, T ship)
         {
             for (int i = 0; i < p._places.Length; i++)
@@ -54,6 +55,7 @@ namespace WindowsFormsShip
             }
             return -1;
         }
+
         public static T operator -(Parking<T> p, int index)
         {
             if (index <= p._places.Length)
@@ -64,6 +66,7 @@ namespace WindowsFormsShip
             }
             return null;
         }
+
         public void Draw(Graphics g)
         {
             DrawMarking(g);
@@ -75,6 +78,7 @@ namespace WindowsFormsShip
                 _places[i]?.DrawTransport(g);
             }
         }
+
         private void DrawMarking(Graphics g)
         {
             Pen pen = new Pen(Color.Black, 3);
@@ -88,6 +92,15 @@ namespace WindowsFormsShip
                 g.DrawLine(pen, i * _placeSizeWidth, 0, i * _placeSizeWidth,
                (pictureHeight / _placeSizeHeight) * _placeSizeHeight);
             }
+        }
+
+        public T GetNext(int index)
+        {
+            if (index < 0 || index >= _places.Length)
+            {
+                return null;
+            }
+            return _places[index];
         }
     }
 }

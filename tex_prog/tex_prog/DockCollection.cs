@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace WindowsFormsShip
         public List<string> Keys => dockStages.Keys.ToList();
         private readonly int pictureWidth;
         private readonly int pictureHeight;
+        private readonly char separator = ':';
         public DockCollection(int pictureWidth, int pictureHeight)
         {
             dockStages = new Dictionary<string, Parking<Vehicle>>();
@@ -35,6 +37,81 @@ namespace WindowsFormsShip
                 if (dockStages.ContainsKey(ind))
                     return dockStages[ind];
                 return null;
+            }
+        }
+
+
+        public bool SaveData(string filename)
+        {
+            using (StreamWriter sw = new StreamWriter(filename, false, Encoding.Default))
+            {
+                sw.WriteLine("DockCollection");
+                foreach (var level in dockStages)
+                {
+                    sw.WriteLine("Dock" + separator + level.Key);
+                    ITransport ship = null;
+                    for (int i = 0; (ship = level.Value.GetNext(i)) != null; i++)
+                    {
+                        if (ship != null)
+                        {
+                            if (ship.GetType().Name == "Ship")
+                            {
+                                sw.WriteLine("Ship" + separator + ship);
+                            }
+                            if (ship.GetType().Name == "Teploboat")
+                            {
+                                sw.WriteLine("Teploboat" + separator + ship);
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        public bool LoadData(string filename)
+        {
+            if (!File.Exists(filename))
+            {
+                return false;
+            }
+            using (StreamReader sr = new StreamReader(filename, Encoding.Default))
+            {
+                if (sr.ReadLine().Contains("DockCollection"))
+                {
+                    dockStages.Clear();
+                }
+                else
+                {
+                    return false;
+                }
+                Vehicle transport = null;
+                string key = string.Empty;
+                string line;
+                for (int i = 0; (line = sr.ReadLine()) != null; i++)
+                {
+                    if (line.Contains("Dock"))
+                    {
+                        key = line.Split(separator)[1];
+                        dockStages.Add(key, new Parking<Vehicle>(pictureWidth, pictureHeight));
+                    }
+                    else if (line.Contains(separator))
+                    {
+                        if (line.Contains("Ship"))
+                        {
+                            transport = new Ship(line.Split(separator)[1]);
+                        }
+                        else if (line.Contains("Teploboat"))
+                        {
+                            transport = new Teploboat(line.Split(separator)[1]);
+                        }
+                        if ((dockStages[key] + transport) == -1)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return true;
             }
         }
     }

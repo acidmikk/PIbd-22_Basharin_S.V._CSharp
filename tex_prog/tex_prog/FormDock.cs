@@ -42,7 +42,7 @@ namespace WindowsFormsShip
         {
             if (listBoxDocks.SelectedIndex > -1)
             {
-                 Bitmap bmp = new Bitmap(pictureBoxParking.Width, pictureBoxParking.Height);
+                Bitmap bmp = new Bitmap(pictureBoxParking.Width, pictureBoxParking.Height);
                 Graphics gr = Graphics.FromImage(bmp);
                 dockCollection[listBoxDocks.SelectedItem.ToString()].Draw(gr);
                 pictureBoxParking.Image = bmp;
@@ -112,6 +112,43 @@ namespace WindowsFormsShip
         private void listBoxDocks_SelectedIndexChanged(object sender, EventArgs e)
         {
             Draw();
+        }
+
+        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if (dockCollection.SaveData(saveFileDialog1.FileName))
+                {
+                    MessageBox.Show("Сохранение прошло успешно", "Результат",
+                   MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Не сохранилось", "Результат",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void загрузитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if (dockCollection.LoadData(openFileDialog1.FileName))
+                {
+                    MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
+                   MessageBoxIcon.Information);
+                    ReloadLevels();
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                }
+
+            }
         }
     }
 }

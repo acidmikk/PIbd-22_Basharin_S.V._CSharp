@@ -13,14 +13,11 @@ namespace WindowsFormsShip
         protected readonly int shipWidth = 150;
         /// Высота отрисовки автомобиля
         protected readonly int shipHeight = 70;
-
+        protected readonly char separator = ';';
         ///
         protected readonly int standartHeight = 110;
 
         /// Конструктор
-        /// <param name="maxSpeed">Максимальная скорость</param>
-        /// <param name="weight">Вес автомобиля</param>
-        /// <param name="mainColor">Основной цвет кузова</param>
         public Ship(int maxSpeed, float weight, Color mainColor)
         {
             MaxSpeed = maxSpeed;
@@ -28,12 +25,19 @@ namespace WindowsFormsShip
             MainColor = mainColor;
         }
 
+        public Ship(string info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 3)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+            }
+        }
+
+
         /// Конструкторс изменением размеров машины
-        /// <param name="maxSpeed">Максимальная скорость</param>
-        /// <param name="weight">Вес автомобиля</param>
-        /// <param name="mainColor">Основной цвет кузова</param>
-        /// <param name="shipWidth">Ширина отрисовки автомобиля</param>
-        /// <param name="shipHeight">Высота отрисовки автомобиля</param>
         protected Ship(int maxSpeed, float weight, Color mainColor, int shipWidth, int
         shipHeight)
         {
@@ -111,5 +115,10 @@ namespace WindowsFormsShip
             g.DrawLine(pen, _startPosX + 15, _startPosY + 80, _startPosX + 25, _startPosY + 80);
             g.DrawLine(pen, _startPosX + 17, _startPosY + 90, _startPosX + 23, _startPosY + 90);
         }
+        public override string ToString()
+        {
+            return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
+        }
+
     }
 }

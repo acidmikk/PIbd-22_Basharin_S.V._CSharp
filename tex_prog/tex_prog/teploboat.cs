@@ -40,6 +40,21 @@ namespace WindowsFormsShip
             Trub = trub;
         }
 
+        public Teploboat(string info) : base(info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 7)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+                DopColor = Color.FromName(strs[3]);
+                Window = Convert.ToBoolean(strs[4]);
+                Line = Convert.ToBoolean(strs[5]);
+                Trub = Convert.ToBoolean(strs[6]);
+            }
+        }
+
         /// Отрисовка лодки
         public override void DrawTransport(Graphics g)
         {
@@ -69,9 +84,15 @@ namespace WindowsFormsShip
             }
             base.DrawTransport(g);
         }
+
         public void SetDopColor(Color color)
         {
             DopColor = color;
         }
-    }
+
+        public override string ToString()
+        {
+            return $"{base.ToString()}{separator}{DopColor.Name}{separator}{Window}{separator}" +
+                $"{Line}{separator}{Trub}";}
+        }
 }

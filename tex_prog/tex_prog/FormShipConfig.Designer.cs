@@ -251,7 +251,7 @@ namespace WindowsFormsShip
             // 
             // panel5
             // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.panel5.BackColor = System.Drawing.Color.ForestGreen;
             this.panel5.Location = new System.Drawing.Point(204, 142);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(47, 48);
@@ -275,7 +275,7 @@ namespace WindowsFormsShip
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.panel3.BackColor = System.Drawing.Color.DarkOrange;
             this.panel3.Location = new System.Drawing.Point(117, 142);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(47, 48);
@@ -283,7 +283,7 @@ namespace WindowsFormsShip
             // 
             // panel7
             // 
-            this.panel7.BackColor = System.Drawing.Color.Blue;
+            this.panel7.BackColor = System.Drawing.Color.CornflowerBlue;
             this.panel7.Location = new System.Drawing.Point(283, 88);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(47, 48);
@@ -291,7 +291,7 @@ namespace WindowsFormsShip
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.Color.Yellow;
+            this.panel4.BackColor = System.Drawing.Color.Gold;
             this.panel4.Location = new System.Drawing.Point(117, 88);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(47, 48);
@@ -299,7 +299,7 @@ namespace WindowsFormsShip
             // 
             // panel8
             // 
-            this.panel8.BackColor = System.Drawing.Color.Red;
+            this.panel8.BackColor = System.Drawing.Color.Tomato;
             this.panel8.Location = new System.Drawing.Point(204, 88);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(47, 48);
