@@ -69,5 +69,9 @@ namespace WindowsFormsShip
             }
             base.DrawTransport(g);
         }
+        public void SetDopColor(Color color)
+        {
+            DopColor = color;
+        }
     }
 }

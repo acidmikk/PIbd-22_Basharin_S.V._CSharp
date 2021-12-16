@@ -41,9 +41,7 @@ namespace WindowsFormsShip
         private void Draw()
         {
             if (listBoxDocks.SelectedIndex > -1)
-            {//если выбран один из пуктов в listBox (при старте программы ни один пункт
-             //не будет выбран и может возникнуть ошибка, если мы попытаемся обратиться к элементу
-             //listBox)
+            {
                  Bitmap bmp = new Bitmap(pictureBoxParking.Width, pictureBoxParking.Height);
                 Graphics gr = Graphics.FromImage(bmp);
                 dockCollection[listBoxDocks.SelectedItem.ToString()].Draw(gr);
@@ -65,7 +63,7 @@ namespace WindowsFormsShip
         {
             if (listBoxDocks.SelectedIndex > -1)
             {
-                if (MessageBox.Show($"Удалить парковку{ listBoxDocks.SelectedItem.ToString()}?",
+                if (MessageBox.Show($"Удалить парковку {listBoxDocks.SelectedItem.ToString()}?",
                     "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     dockCollection.DelDock(textBoxNewLevelName.Text);
@@ -77,42 +75,22 @@ namespace WindowsFormsShip
         {
             if (listBoxDocks.SelectedIndex > -1)
             {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    var ship = new Ship(100, 1000, dialog.Color);
-                    if ((dockCollection[listBoxDocks.SelectedItem.ToString()] + ship) != -1)
-                    {
-                        Draw();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Парковка переполнена");
-                    }
-                }
+                var formShipConfig = new FormShipConfig();
+                formShipConfig.AddEvent(AddShip);
+                formShipConfig.Show();
             }
         }
-        private void buttonSetSuperShip_Click(object sender, EventArgs e)
+        private void AddShip(Vehicle ship)
         {
-            if (listBoxDocks.SelectedIndex > -1)
+            if (ship != null && listBoxDocks.SelectedIndex > -1)
             {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
+                if ((dockCollection[listBoxDocks.SelectedItem.ToString()]) + (ship) != -1)
                 {
-                    ColorDialog dialogDop = new ColorDialog();
-                    if (dialogDop.ShowDialog() == DialogResult.OK)
-                    {
-                        var ship = new Teploboat(100, 1000, dialog.Color, dialogDop.Color,
-                       true, true, true);
-                        if ((dockCollection[listBoxDocks.SelectedItem.ToString()] + ship) != -1)
-                        {
-                            Draw();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Парковка переполнена");
-                        }
-                    }
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Технику не удалось поставить");
                 }
             }
         }

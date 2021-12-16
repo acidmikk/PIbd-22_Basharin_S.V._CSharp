@@ -22,7 +22,7 @@ namespace WindowsFormsShip
 			this.ship = ship;
 			Draw();
 		}
-			private void Draw()
+		private void Draw()
 		{
 			Bitmap bmp = new Bitmap(pictureBoxBoat.Width, pictureBoxBoat.Height);
 			Graphics g = Graphics.FromImage(bmp);

@@ -31,12 +31,12 @@ namespace WindowsFormsShip
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormShip));
             this.pictureBoxBoat = new System.Windows.Forms.PictureBox();
-            this.buttonCreateShip = new System.Windows.Forms.Button();
+            //this.buttonCreateShip = new System.Windows.Forms.Button();
             this.buttonLeft = new System.Windows.Forms.Button();
             this.buttonUp = new System.Windows.Forms.Button();
             this.buttonRight = new System.Windows.Forms.Button();
             this.buttonDown = new System.Windows.Forms.Button();
-            this.buttonCreateSuperShip = new System.Windows.Forms.Button();
+            //this.buttonCreateSuperShip = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBoat)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,13 +51,13 @@ namespace WindowsFormsShip
             // 
             // buttonCreateShip
             // 
-            this.buttonCreateShip.Location = new System.Drawing.Point(13, 13);
+            /*this.buttonCreateShip.Location = new System.Drawing.Point(13, 13);
             this.buttonCreateShip.Name = "buttonCreateShip";
             this.buttonCreateShip.Size = new System.Drawing.Size(235, 39);
             this.buttonCreateShip.TabIndex = 1;
             this.buttonCreateShip.Text = "Создать теплоход";
             this.buttonCreateShip.UseVisualStyleBackColor = true;
-            this.buttonCreateShip.Click += new System.EventHandler(this.buttonCreateShip_Click);
+            this.buttonCreateShip.Click += new System.EventHandler(this.buttonCreateShip_Click);*/
             // 
             // buttonLeft
             // 
@@ -109,25 +109,25 @@ namespace WindowsFormsShip
             // 
             // buttonCreateSuperShip
             // 
-            this.buttonCreateSuperShip.Location = new System.Drawing.Point(13, 58);
+            /*this.buttonCreateSuperShip.Location = new System.Drawing.Point(13, 58);
             this.buttonCreateSuperShip.Name = "buttonCreateSuperShip";
             this.buttonCreateSuperShip.Size = new System.Drawing.Size(313, 39);
             this.buttonCreateSuperShip.TabIndex = 6;
             this.buttonCreateSuperShip.Text = "Создать теплоход про";
             this.buttonCreateSuperShip.UseVisualStyleBackColor = true;
-            this.buttonCreateSuperShip.Click += new System.EventHandler(this.buttonCreateSuperShip_Click);
+            this.buttonCreateSuperShip.Click += new System.EventHandler(this.buttonCreateSuperShip_Click);*/
             // 
             // FormShip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1374, 829);
-            this.Controls.Add(this.buttonCreateSuperShip);
+            //this.Controls.Add(this.buttonCreateSuperShip);
             this.Controls.Add(this.buttonDown);
             this.Controls.Add(this.buttonRight);
             this.Controls.Add(this.buttonUp);
             this.Controls.Add(this.buttonLeft);
-            this.Controls.Add(this.buttonCreateShip);
+            //this.Controls.Add(this.buttonCreateShip);
             this.Controls.Add(this.pictureBoxBoat);
             this.Name = "FormShip";
             this.Text = "FormShip";
@@ -139,12 +139,12 @@ namespace WindowsFormsShip
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBoxBoat;
-        private System.Windows.Forms.Button buttonCreateShip;
+        //private System.Windows.Forms.Button buttonCreateShip;
         private System.Windows.Forms.Button buttonLeft;
         private System.Windows.Forms.Button buttonUp;
         private System.Windows.Forms.Button buttonRight;
         private System.Windows.Forms.Button buttonDown;
-        private System.Windows.Forms.Button buttonCreateSuperShip;
+        //private System.Windows.Forms.Button buttonCreateSuperShip;
     }
 }
 

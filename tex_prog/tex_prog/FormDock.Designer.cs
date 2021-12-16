@@ -31,7 +31,6 @@ namespace WindowsFormsShip
         {
             this.pictureBoxParking = new System.Windows.Forms.PictureBox();
             this.buttonSetShip = new System.Windows.Forms.Button();
-            this.buttonSetSuperShip = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonTakeShip = new System.Windows.Forms.Button();
             this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
@@ -57,24 +56,13 @@ namespace WindowsFormsShip
             // buttonSetShip
             // 
             this.buttonSetShip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSetShip.Location = new System.Drawing.Point(1133, 467);
+            this.buttonSetShip.Location = new System.Drawing.Point(1133, 538);
             this.buttonSetShip.Name = "buttonSetShip";
             this.buttonSetShip.Size = new System.Drawing.Size(217, 65);
             this.buttonSetShip.TabIndex = 1;
-            this.buttonSetShip.Text = "Припарковать обычный корабль";
+            this.buttonSetShip.Text = "Добавить корабль";
             this.buttonSetShip.UseVisualStyleBackColor = true;
             this.buttonSetShip.Click += new System.EventHandler(this.buttonSetShip_Click);
-            // 
-            // buttonSetSuperShip
-            // 
-            this.buttonSetSuperShip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSetSuperShip.Location = new System.Drawing.Point(1133, 538);
-            this.buttonSetSuperShip.Name = "buttonSetSuperShip";
-            this.buttonSetSuperShip.Size = new System.Drawing.Size(217, 65);
-            this.buttonSetSuperShip.TabIndex = 2;
-            this.buttonSetSuperShip.Text = "Припарковать супер корабль";
-            this.buttonSetSuperShip.UseVisualStyleBackColor = true;
-            this.buttonSetSuperShip.Click += new System.EventHandler(this.buttonSetSuperShip_Click);
             // 
             // groupBox1
             // 
@@ -183,7 +171,6 @@ namespace WindowsFormsShip
             this.Controls.Add(this.textBoxNewLevelName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.buttonSetSuperShip);
             this.Controls.Add(this.buttonSetShip);
             this.Controls.Add(this.pictureBoxParking);
             this.Name = "FormDock";
@@ -200,7 +187,6 @@ namespace WindowsFormsShip
 
         private System.Windows.Forms.PictureBox pictureBoxParking;
         private System.Windows.Forms.Button buttonSetShip;
-        private System.Windows.Forms.Button buttonSetSuperShip;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.MaskedTextBox maskedTextBox1;
         private System.Windows.Forms.Label label1;

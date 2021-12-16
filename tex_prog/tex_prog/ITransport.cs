@@ -14,11 +14,8 @@ namespace WindowsFormsShip
         /// <param name="width">Ширина картинки</param>
         /// <param name="height">Высота картинки</param>
         void SetPosition(int x, int y, int width, int height);
-
-        /// <param name="direction">Направление</param>
         void MoveTransport(Direction direction);
-
-        /// <param name="g"></param>
         void DrawTransport(Graphics g);
+        void SetMainColor(Color color);
     }
 }
