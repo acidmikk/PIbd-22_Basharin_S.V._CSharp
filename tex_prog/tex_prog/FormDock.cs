@@ -67,7 +67,7 @@ namespace WindowsFormsShip
         {
             if (maskedTextBox1.Text != "")
             {
-                var car = parking - (Convert.ToInt32(maskedTextBox1.Text) + 1);
+                var car = parking - (Convert.ToInt32(maskedTextBox1.Text));
                 if (car != null)
                 {
                     FormShip form = new FormShip();
