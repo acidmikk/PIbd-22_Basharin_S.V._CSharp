@@ -17,11 +17,16 @@ namespace WindowsFormsShip
 		{
 			InitializeComponent();
 		}
-		private void Draw()
+		public void SetShip(ITransport ship)
+		{
+			this.ship = ship;
+			Draw();
+		}
+			private void Draw()
 		{
 			Bitmap bmp = new Bitmap(pictureBoxBoat.Width, pictureBoxBoat.Height);
 			Graphics g = Graphics.FromImage(bmp);
-			ship.DrawTransport(g);
+			ship?.DrawTransport(g);
 			pictureBoxBoat.Image = bmp;
 		}
 		private void buttonCreateShip_Click(object sender, EventArgs e)
@@ -46,16 +51,16 @@ namespace WindowsFormsShip
 			switch (name)
 			{
 				case "buttonUp":
-					ship.MoveTransport(Direction.Up);
+					ship?.MoveTransport(Direction.Up);
 					break;
 				case "buttonDown":
-					ship.MoveTransport(Direction.Down);
+					ship?.MoveTransport(Direction.Down);
 					break;
 				case "buttonLeft":
-					ship.MoveTransport(Direction.Left);
+					ship?.MoveTransport(Direction.Left);
 					break;
 				case "buttonRight":
-					ship.MoveTransport(Direction.Right);
+					ship?.MoveTransport(Direction.Right);
 					break;
 			}
 			Draw();

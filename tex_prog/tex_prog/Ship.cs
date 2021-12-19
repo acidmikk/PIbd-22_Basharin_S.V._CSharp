@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace WindowsFormsShip
 {
-    public class Ship : Vihanicle
+    public class Ship : Vehicle
     {
         /// Ширина отрисовки автомобиля
         protected readonly int shipWidth = 150;
