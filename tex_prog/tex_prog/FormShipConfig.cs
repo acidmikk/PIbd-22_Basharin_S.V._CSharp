@@ -26,6 +26,10 @@ namespace WindowsFormsShip
             panel7.MouseDown += panelColor_MouseDown;
             panel8.MouseDown += panelColor_MouseDown;
             buttonCencel.Click += (object sender, EventArgs e) => { Close(); };
+            buttonAdd.Click += delegate (object sender, EventArgs e) {
+                eventAddShip?.Invoke(ship);
+                Close();
+            };
         }
 
         private void DrawShip()
@@ -79,12 +83,12 @@ namespace WindowsFormsShip
             switch (e.Data.GetData(DataFormats.Text).ToString())
             {
                 case "Обычный теплоход":
-                    ship = new Ship((int)numericUpDownSpeed.Value, (int)numericUpDownWeight.Value, 
+                    ship = new Ship((int)numericUpDownSpeed.Value, (int)numericUpDownWeight.Value,
                         Color.White);
                     break;
                 case "Супер теплоход":
-                    ship = new Teploboat((int)numericUpDownSpeed.Value, (int)numericUpDownWeight.Value, 
-                        Color.White, Color.Black, checkBoxWindow.Checked, checkBoxLine.Checked, 
+                    ship = new Teploboat((int)numericUpDownSpeed.Value, (int)numericUpDownWeight.Value,
+                        Color.White, Color.Black, checkBoxWindow.Checked, checkBoxLine.Checked,
                         checkBoxTrub.Checked);
                     break;
             }
@@ -125,11 +129,6 @@ namespace WindowsFormsShip
                     DrawShip();
                 }
             }
-        }
-        private void buttonAdd_Click(object sender, EventArgs e)
-        {
-            eventAddShip?.Invoke(ship);
-            Close();
         }
     }
 }

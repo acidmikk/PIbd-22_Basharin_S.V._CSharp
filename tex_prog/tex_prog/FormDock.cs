@@ -98,12 +98,12 @@ namespace WindowsFormsShip
         {
             if (listBoxDocks.SelectedIndex > -1 && maskedTextBox1.Text != "")
             {
-                var car = dockCollection[listBoxDocks.SelectedItem.ToString()] -
-               Convert.ToInt32(maskedTextBox1.Text);
-                if (car != null)
+                var ship = dockCollection[listBoxDocks.SelectedItem.ToString()] -
+               (Convert.ToInt32(maskedTextBox1.Text) - 1);
+                if (ship != null)
                 {
                     FormShip form = new FormShip();
-                    form.SetShip(car);
+                    form.SetShip(ship);
                     form.ShowDialog();
                 }
                 Draw();
