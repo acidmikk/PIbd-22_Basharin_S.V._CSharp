@@ -347,7 +347,7 @@ namespace WindowsFormsShip
             this.buttonAdd.TabIndex = 8;
             this.buttonAdd.Text = "Добавить";
             this.buttonAdd.UseVisualStyleBackColor = true;
-            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            //this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // buttonCencel
             // 

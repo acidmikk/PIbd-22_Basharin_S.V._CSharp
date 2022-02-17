@@ -29,22 +29,6 @@ namespace WindowsFormsShip
 			ship?.DrawTransport(g);
 			pictureBoxBoat.Image = bmp;
 		}
-		/*private void buttonCreateShip_Click(object sender, EventArgs e)
-		{
-			Random rnd = new Random();
-			ship = new Ship(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Honeydew);
-			ship.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxBoat.Width,
-				pictureBoxBoat.Height);
-			Draw();
-		}
-		private void buttonCreateSuperShip_Click(object sender, EventArgs e)
-		{
-			Random rnd = new Random();
-			ship = new Teploboat(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Honeydew, Color.DarkMagenta, true, true, true);
-			ship.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxBoat.Width,
-				pictureBoxBoat.Height);
-			Draw();
-		}*/
 		private void buttonMove_Click(object sender, EventArgs e)
 		{
 			string name = (sender as Button).Name;
