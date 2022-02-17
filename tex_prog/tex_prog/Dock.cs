@@ -89,6 +89,24 @@ namespace WindowsFormsShip
                (pictureHeight / _placeSizeHeight) * _placeSizeHeight);
             }
         }
+        public T this[int index]
+        {
+            get
+            {
+                if (index < 0 || index >= _places.Length)
+                {
+                    return null;
+                }
+                else return _places[index];
+            }
+            set
+            {
+                if (_places.Length >= index)
+                {
+                    _places[index] = value;
+                }
+            }
+        }
     }
 }
 
