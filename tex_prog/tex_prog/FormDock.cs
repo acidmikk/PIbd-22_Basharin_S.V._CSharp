@@ -104,11 +104,13 @@ namespace WindowsFormsShip
                 }
                 catch (DockOverflowException ex)
                 {
+                    logger.Warn($"Попытка поставить технику в полное депо.");
                     MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK,
                    MessageBoxIcon.Error);
                 }
                 catch (Exception ex)
                 {
+                    logger.Warn($"Неизвестная ошибка при попытке поставить технику");
                     MessageBox.Show(ex.Message, "Неизвестная ошибка",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -134,11 +136,13 @@ namespace WindowsFormsShip
                 }
                 catch (DockNotFoundException ex)
                 {
+                    logger?.Warn(ex.Message);
                     MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK,
                    MessageBoxIcon.Error);
                 }
                 catch (Exception ex)
                 {
+                    logger.Warn($"Неизвестная ошибка при попытке изъять технику");
                     MessageBox.Show(ex.Message, "Неизвестная ошибка",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }

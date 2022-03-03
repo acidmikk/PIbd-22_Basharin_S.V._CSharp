@@ -8,7 +8,7 @@ namespace WindowsFormsShip
 {
     internal class DockNotFoundException : Exception
     {
-        public DockNotFoundException(int i) : base("Не найден корабль по месту " + i)
+        public DockNotFoundException(int i) : base("Не найден корабль по месту " + (i + 1))
         { }
     }
 }
