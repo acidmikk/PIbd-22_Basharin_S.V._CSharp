@@ -69,6 +69,35 @@ namespace WindowsFormsShip
             return true;
         }
 
+        public bool SaveDock(string filename, string levelname)
+        {
+            if (!dockStages.ContainsKey(filename))
+            {
+                return false;
+            }
+            Parking<Vehicle> level = dockStages[levelname];
+            using (StreamWriter sw = new StreamWriter(filename, false, Encoding.Default))
+            {
+                sw.WriteLine("Dock" + separator + levelname);
+                ITransport ship = null;
+                for (int i = 0; (ship = level.GetNext(i)) != null; i++)
+                {
+                    if (ship != null)
+                    {
+                        if (ship.GetType().Name == "Ship")
+                        {
+                            sw.WriteLine("Ship" + separator + ship);
+                        }
+                        if (ship.GetType().Name == "Teploboat")
+                        {
+                            sw.WriteLine("Teploboat" + separator + ship);
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
         public bool LoadData(string filename)
         {
             if (!File.Exists(filename))
