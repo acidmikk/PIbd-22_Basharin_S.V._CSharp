@@ -40,9 +40,19 @@ namespace WindowsFormsShip
             }
         }
 
-
-        public bool SaveData(string filename)
+        private void WriteToFile(string text, FileStream stream)
         {
+            byte[] info = new UTF8Encoding(true).GetBytes(text);
+            stream.Write(info, 0, info.Length);
+        }
+
+
+        public void SaveData(string filename)
+        {
+            if (File.Exists(filename))
+            {
+                File.Delete(filename);
+            }
             using (StreamWriter sw = new StreamWriter(filename, false, Encoding.Default))
             {
                 sw.WriteLine("DockCollection");
@@ -66,14 +76,13 @@ namespace WindowsFormsShip
                     }
                 }
             }
-            return true;
         }
 
-        public bool LoadData(string filename)
+        public void LoadData(string filename)
         {
             if (!File.Exists(filename))
             {
-                return false;
+                throw new FileNotFoundException();
             }
             using (StreamReader sr = new StreamReader(filename, Encoding.Default))
             {
@@ -83,7 +92,7 @@ namespace WindowsFormsShip
                 }
                 else
                 {
-                    return false;
+                    throw new FileFormatException("Неверный формат файла");
                 }
                 Vehicle transport = null;
                 string key = string.Empty;
@@ -105,13 +114,12 @@ namespace WindowsFormsShip
                         {
                             transport = new Teploboat(line.Split(separator)[1]);
                         }
-                        if ((dockStages[key] + transport) == -1)
+                        if (!(dockStages[key] + transport))
                         {
-                            return false;
+                            throw new TypeLoadException("Не удалось загрузить автомобиль на парковку");
                         }
                     }
                 }
-                return true;
             }
         }
     }

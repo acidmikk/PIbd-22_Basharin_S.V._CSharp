@@ -9,62 +9,42 @@ namespace WindowsFormsShip
 {
     class Parking<T> where T : class, ITransport
     {
-        /// <summary>
-        /// Массив объектов, которые храним
-        /// </summary>
-        private readonly T[] _places;
-        /// <summary>
-        /// Ширина окна отрисовки
-        /// </summary>
+        private readonly List<T> _places;
+        private readonly int _maxCount;
         private readonly int pictureWidth;
-        /// <summary>
-        /// Высота окна отрисовки
-        /// </summary>
         private readonly int pictureHeight;
-        /// <summary>
-        /// Размер парковочного места (ширина)
-        /// </summary>
         private readonly int _placeSizeWidth = 210;
-        /// <summary>
-        /// Размер парковочного места (высота)
-        /// </summary>
         private readonly int _placeSizeHeight = 150;
-        /// <summary>
-        /// Конструктор
-        /// </summary>
-        /// <param name="picWidth">Рамзер парковки - ширина</param>
-        /// <param name="picHeight">Рамзер парковки - высота</param>
+
         public Parking(int picWidth, int picHeight)
         {
             int width = picWidth / _placeSizeWidth;
             int height = picHeight / _placeSizeHeight;
-            _places = new T[width * height];
+            _places = new List<T>();
+            _maxCount = width * height;
             pictureWidth = picWidth;
             pictureHeight = picHeight;
         }
 
-        public static int operator +(Parking<T> p, T ship)
+        public static bool operator +(Parking<T> p, T ship)
         {
-            for (int i = 0; i < p._places.Length; i++)
+            if (p._places.Count >= p._maxCount)
             {
-                if (p._places[i] == null)
-                {
-                    p._places[i] = ship;
-                    return i;
-                }
+                throw new DockOverflowException();
             }
-            return -1;
+            p._places.Add(ship);
+            return true;
         }
 
         public static T operator -(Parking<T> p, int index)
         {
-            if (index <= p._places.Length)
+            if (index < -1 || index > p._places.Count)
             {
-                T result = p._places[index];
-                p._places[index] = null;
-                return result;
+                throw new DockNotFoundException(index);
             }
-            return null;
+            T car = p._places[index];
+            p._places.RemoveAt(index);
+            return car;
         }
 
         public void Draw(Graphics g)
@@ -72,7 +52,7 @@ namespace WindowsFormsShip
             DrawMarking(g);
             int widthParam = pictureWidth / _placeSizeWidth;
             int heightParam = pictureHeight / _placeSizeHeight;
-            for (int i = 0; i < _places.Length; i++)
+            for (int i = 0; i < _places.Count; i++)
             {
                 _places[i]?.SetPosition(i % widthParam * _placeSizeWidth + 15, heightParam + i / heightParam * _placeSizeHeight + 5, pictureWidth, pictureHeight);
                 _places[i]?.DrawTransport(g);
@@ -96,7 +76,7 @@ namespace WindowsFormsShip
 
         public T GetNext(int index)
         {
-            if (index < 0 || index >= _places.Length)
+            if (index < 0 || index >= _places.Count)
             {
                 return null;
             }
