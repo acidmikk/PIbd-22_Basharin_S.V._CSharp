@@ -3,34 +3,33 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace WindowsFormsShip
 {
     class DockCollection
     {
-        readonly Dictionary<string, Parking<Vehicle>> dockStages;
+        readonly Dictionary<string, Dock<Vehicle>> dockStages;
         public List<string> Keys => dockStages.Keys.ToList();
         private readonly int pictureWidth;
         private readonly int pictureHeight;
         private readonly char separator = ':';
         public DockCollection(int pictureWidth, int pictureHeight)
         {
-            dockStages = new Dictionary<string, Parking<Vehicle>>();
+            dockStages = new Dictionary<string, Dock<Vehicle>>();
             this.pictureWidth = pictureWidth;
             this.pictureHeight = pictureHeight;
         }
         public void AddDock(string name)
         {
             if (!dockStages.ContainsKey(name))
-                dockStages.Add(name, new Parking<Vehicle>(pictureWidth, pictureHeight));
+                dockStages.Add(name, new Dock<Vehicle>(pictureWidth, pictureHeight));
         }
         public void DelDock(string name)
         {
             if (dockStages.ContainsKey(name))
                 dockStages.Remove(name);
         }
-        public Parking<Vehicle> this[string ind]
+        public Dock<Vehicle> this[string ind]
         {
             get
             {
@@ -59,20 +58,19 @@ namespace WindowsFormsShip
                 foreach (var level in dockStages)
                 {
                     sw.WriteLine("Dock" + separator + level.Key);
-                    ITransport ship = null;
-                    for (int i = 0; (ship = level.Value.GetNext(i)) != null; i++)
+                    foreach (ITransport ship in level.Value)
                     {
-                        if (ship != null)
+                        //Записываем тип мшаины
+                        if (ship.GetType().Name == "Ship")
                         {
-                            if (ship.GetType().Name == "Ship")
-                            {
-                                sw.WriteLine("Ship" + separator + ship);
-                            }
-                            if (ship.GetType().Name == "Teploboat")
-                            {
-                                sw.WriteLine("Teploboat" + separator + ship);
-                            }
+                            sw.WriteLine("Ship" + separator);
                         }
+                        else if (ship.GetType().Name == "Teploboat")
+                        {
+                            sw.WriteLine("Teploboat" + separator);
+                        }
+                        //Записываемые параметры
+                        sw.Write(ship);
                     }
                 }
             }
@@ -102,7 +100,7 @@ namespace WindowsFormsShip
                     if (line.Contains("Dock"))
                     {
                         key = line.Split(separator)[1];
-                        dockStages.Add(key, new Parking<Vehicle>(pictureWidth, pictureHeight));
+                        dockStages.Add(key, new Dock<Vehicle>(pictureWidth, pictureHeight));
                     }
                     else if (line.Contains(separator))
                     {
@@ -116,7 +114,7 @@ namespace WindowsFormsShip
                         }
                         if (!(dockStages[key] + transport))
                         {
-                            throw new TypeLoadException("Не удалось загрузить автомобиль на парковку");
+                            throw new TypeLoadException("Не удалось загрузить корабль в док");
                         }
                     }
                 }

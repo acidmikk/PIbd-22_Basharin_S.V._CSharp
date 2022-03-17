@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace WindowsFormsShip
 {
-    public class Teploboat : Ship
+    public class Teploboat : Ship, IEquatable<Teploboat>
     {
         /// Дополнительный цвет
         public Color DopColor { private set; get; }
@@ -93,6 +93,30 @@ namespace WindowsFormsShip
         public override string ToString()
         {
             return $"{base.ToString()}{separator}{DopColor.Name}{separator}{Window}{separator}" +
-                $"{Line}{separator}{Trub}";}
+                $"{Line}{separator}{Trub}";
         }
+        public bool Equals(Teploboat other)
+        {
+            if (!Equals((Ship)other))
+                return false;
+            if (DopColor != other.DopColor)
+                return false;
+            if (Window != other.Window)
+                return false;
+            if (Line != other.Line)
+                return false;
+            if (Trub != other.Trub)
+                return false;
+            return true;
+        }
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+                return false;
+            if (!(obj is Teploboat shipObj))
+                return false;
+            else
+                return Equals(shipObj);
+        }
+    }
 }
