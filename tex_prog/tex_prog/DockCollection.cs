@@ -60,17 +60,14 @@ namespace WindowsFormsShip
                     sw.WriteLine("Dock" + separator + level.Key);
                     foreach (ITransport ship in level.Value)
                     {
-                        //Записываем тип мшаины
                         if (ship.GetType().Name == "Ship")
                         {
-                            sw.WriteLine("Ship" + separator);
+                            sw.WriteLine("Ship" + separator + ship);
                         }
                         else if (ship.GetType().Name == "Teploboat")
                         {
-                            sw.WriteLine("Teploboat" + separator);
+                            sw.WriteLine("Teploboat" + separator + ship);
                         }
-                        //Записываемые параметры
-                        sw.Write(ship);
                     }
                 }
             }
